@@ -2,4 +2,4 @@
 
 <p>Java message is a simple user friendly universal message system.</p>
 
-<p>InputStream Fix</p>
+<p>InputStream Fix is on its way!</p>
