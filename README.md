@@ -1,3 +1,3 @@
-# JavaMessage
+<h1>JavaMessage</h1>
 
-Java message is a simple user friendly universal message system.
+<p>Java message is a simple user friendly universal message system.</p>
