@@ -1,4 +1,8 @@
-//Java message is a simple user friendly universal message system.
+//Client for JavaMessage
+//
+//Plans:
+//
+//Make a better GUI, ie colors and stuff...
 
 import java.net.*;
 import java.io.*;

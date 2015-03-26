@@ -1,4 +1,8 @@
-//The current non-working part of the project.
+//Server for JavaMessage project.
+//
+//Issues:
+//
+//MessageThread needs to share a InputStream between threads for messaging.
 
 import java.net.*;
 import java.io.*;
