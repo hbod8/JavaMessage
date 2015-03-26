@@ -25,7 +25,7 @@ public class MessageServer {
             try {
                 socket = serverSocket.accept();
             } catch (Exception e) {
-                System.out.println("I/O error: " + e);
+                System.err.println(e);
             }
             // new thread for a client
             new MessageThread(socket).start();
@@ -45,7 +45,8 @@ class MessageThread extends Thread {
         try {
             inp = socket.getInputStream();
             brinp = new BufferedReader(new InputStreamReader(inp));
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.err.println("USER left");
             return;
         }
         String line;
