@@ -18,13 +18,13 @@ public class MessageServer {
 
         try {
             serverSocket = new ServerSocket(PORT);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println(e);
         }
         while (true) {
             try {
                 socket = serverSocket.accept();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.out.println("I/O error: " + e);
             }
             // new thread for a client
