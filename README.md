@@ -1,5 +1,7 @@
-<h1>JavaMessage</h1>
+# JavaMessage
 
-<p>Java message is a simple user friendly universal message system.</p>
+## Java message is a simple user friendly universal message system.
 
-<p>InputStream Fix is on its way!</p>
+### A fix has been discovered and is on its way
+
+The fix will use Datagram Packets to relay data from client-to-client on the server.
