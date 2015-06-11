@@ -77,7 +77,7 @@ class MessageConnectionOut extends Thread {
 
 class MessageConnectionIn extends Thread {
     protected Socket client;
-//    public MulticastSocket ms;
+    public MulticastSocket ms = null;
 //    public MessageConnectionIn(Socket client, MulticastSocket ms) {
 //        this.client = client;
 //        this.ms = ms;
