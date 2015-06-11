@@ -55,6 +55,7 @@ class MessageConnectionOut extends Thread {
                 DatagramPacket dp = new DatagramPacket(outgoing, outgoing.length);
                 ms.receive(dp);
                 dos.writeChars(new String(outgoing) + "\n");
+                System.out.println("SENT_TO:" + this.getName());
             }
         } catch(Exception e) {
             System.out.println("OUT:Error connecting " + this.getName() + ": " + e.getLocalizedMessage());
