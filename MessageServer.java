@@ -18,7 +18,7 @@ public class MessageServer {
         Socket client = null;
         DatagramSocket ds = null;
         try {
-            ds = new DatagramSocket(4);
+            ms = new MulticastSocket(4);
         } catch(Exception e) {
             System.out.println("IN:Error creating Datagram Server: " + e.getLocalizedMessage());
             e.printStackTrace();
