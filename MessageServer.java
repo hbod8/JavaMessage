@@ -65,10 +65,10 @@ class MessageConnectionOut extends Thread {
 
 class MessageConnectionIn extends Thread {
     protected Socket client;
-    public MulticastSocket ds;
-    public MessageConnectionIn(Socket client, MulticastSocket ds) {
+    public MulticastSocket ms;
+    public MessageConnectionIn(Socket client, MulticastSocket ms) {
         this.client = client;
-        this.ds = ds;
+        this.ms = ms;
     }
     public void run() {
         this.setName(client.getInetAddress().getHostAddress() + ":IN");
@@ -83,7 +83,7 @@ class MessageConnectionIn extends Thread {
                 for (int c = 0; c < output.length; c++) output[c] = 0x0;
                 for (int i = 0; i < input.length && i < output.length; i++) output[i] = input[i];
                 DatagramPacket dp = new DatagramPacket(output, output.length, InetAddress.getLocalHost(), 4);
-                ds.send(dp);
+                ms.send(dp);
             }
         } catch(Exception e) {
             System.out.println("IN:Error connecting to " + this.getName() + ": " + e.getLocalizedMessage());
