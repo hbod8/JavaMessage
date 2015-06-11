@@ -40,10 +40,21 @@ public class MessageServer {
 
 class MessageConnectionOut extends Thread {
     protected Socket client;
-    public MulticastSocket ms;
-    public MessageConnectionOut(Socket client, MulticastSocket ms) {
+    public MulticastSocket ms = null;
+//    public MessageConnectionOut(Socket client, MulticastSocket ms) {
+//        this.client = client;
+//        this.ms = ms;
+//    }
+    public MessageConnectionOut(Socket client) {
         this.client = client;
-        this.ms = ms;
+        try {
+            ms = new MulticastSocket(4);
+            ms.joinGroup(InetAddress.getByName("225.65.65.65"));
+        } catch(Exception e) {
+            System.out.println("IN:Error creating Datagram Server: " + e.getLocalizedMessage());
+            e.printStackTrace();
+            System.exit(0);
+        }
     }
     public void run() {
         this.setName(client.getInetAddress().getHostAddress() + ":OUT");
