@@ -16,9 +16,10 @@ public class MessageServer {
         }
         System.out.println("Created server port, now waiting for users...");
         Socket client = null;
-        DatagramSocket ds = null;
+        MulticastSocket ms = null;
         try {
             ms = new MulticastSocket(4);
+            ms.joinGroup(new InetAddress.getByName("255.65.65.65"));
         } catch(Exception e) {
             System.out.println("IN:Error creating Datagram Server: " + e.getLocalizedMessage());
             e.printStackTrace();
@@ -31,18 +32,18 @@ public class MessageServer {
             } catch(Exception e) {
                 System.out.println("Error on server: " + e.getLocalizedMessage());
             }
-            new MessageConnectionIn(client, ds).start();
-            new MessageConnectionOut(client, ds).start();
+            new MessageConnectionIn(client, ms).start();
+            new MessageConnectionOut(client, ms).start();
         }
     }
 }
 
 class MessageConnectionOut extends Thread {
     protected Socket client;
-    public DatagramSocket ds;
-    public MessageConnectionOut(Socket client, DatagramSocket ds) {
+    public MulticastSocket ms;
+    public MessageConnectionOut(Socket client, MulticastSocket ms) {
         this.client = client;
-        this.ds = ds;
+        this.ms = ms;
     }
     public void run() {
         this.setName(client.getInetAddress().getHostAddress() + ":OUT");
@@ -52,7 +53,7 @@ class MessageConnectionOut extends Thread {
             while (true) {
                 byte[] outgoing = new byte[4096];
                 DatagramPacket dp = new DatagramPacket(outgoing, outgoing.length);
-                ds.receive(dp);
+                ms.receive(dp);
                 dos.writeChars(new String(outgoing) + "\n");
             }
         } catch(Exception e) {
@@ -64,8 +65,8 @@ class MessageConnectionOut extends Thread {
 
 class MessageConnectionIn extends Thread {
     protected Socket client;
-    public DatagramSocket ds;
-    public MessageConnectionIn(Socket client, DatagramSocket ds) {
+    public MulticastSocket ds;
+    public MessageConnectionIn(Socket client, MulticastSocket ds) {
         this.client = client;
         this.ds = ds;
     }
