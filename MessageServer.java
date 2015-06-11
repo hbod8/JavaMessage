@@ -5,7 +5,7 @@ import java.util.*;
 public class MessageServer {
     public static void main(String[] args) {
         int port = Integer.parseInt(args[0]);
-        MessageServer ms = new MessageServer();
+        MessageServer msgsrv = new MessageServer();
         System.out.println("Starting server on port " + port + "...");
         ServerSocket ss = null;
         try {
@@ -19,7 +19,7 @@ public class MessageServer {
         MulticastSocket ms = null;
         try {
             ms = new MulticastSocket(4);
-            ms.joinGroup(new InetAddress.getByName("255.65.65.65"));
+            ms.joinGroup(InetAddress.getByName("255.65.65.65"));
         } catch(Exception e) {
             System.out.println("IN:Error creating Datagram Server: " + e.getLocalizedMessage());
             e.printStackTrace();
