@@ -32,7 +32,7 @@ public class MessageServer {
             } catch(Exception e) {
                 System.out.println("Error on server: " + e.getLocalizedMessage());
             }
-            new MessageConnectionIn(client, ms).start();
+            new MessageConnectionIn(client).start();
             new MessageConnectionOut(client).start();
         }
     }
@@ -77,10 +77,21 @@ class MessageConnectionOut extends Thread {
 
 class MessageConnectionIn extends Thread {
     protected Socket client;
-    public MulticastSocket ms;
-    public MessageConnectionIn(Socket client, MulticastSocket ms) {
+//    public MulticastSocket ms;
+//    public MessageConnectionIn(Socket client, MulticastSocket ms) {
+//        this.client = client;
+//        this.ms = ms;
+//    }
+    public MessageConnectionIn(Socket client) {
         this.client = client;
-        this.ms = ms;
+        try {
+            ms = new MulticastSocket(4);
+            ms.joinGroup(InetAddress.getByName("225.65.65.65"));
+        } catch(Exception e) {
+            System.out.println("IN:Error creating Datagram Server: " + e.getLocalizedMessage());
+            e.printStackTrace();
+            System.exit(0);
+        }
     }
     public void run() {
         this.setName(client.getInetAddress().getHostAddress() + ":IN");
