@@ -33,7 +33,7 @@ public class MessageServer {
                 System.out.println("Error on server: " + e.getLocalizedMessage());
             }
             new MessageConnectionIn(client, ms).start();
-            new MessageConnectionOut(client, ms).start();
+            new MessageConnectionOut(client).start();
         }
     }
 }
