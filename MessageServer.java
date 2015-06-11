@@ -19,7 +19,7 @@ public class MessageServer {
         MulticastSocket ms = null;
         try {
             ms = new MulticastSocket(4);
-            ms.joinGroup(InetAddress.getByName("255.65.65.65"));
+            ms.joinGroup(InetAddress.getByName("225.65.65.65"));
         } catch(Exception e) {
             System.out.println("IN:Error creating Datagram Server: " + e.getLocalizedMessage());
             e.printStackTrace();
